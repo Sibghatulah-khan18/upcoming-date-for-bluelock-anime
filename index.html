@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Lock - Official Release 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0066cc;
+            --dark-blue: #001a4d;
+            --light-blue: #00ccff;
+            --gold: #ffd700;
+            --dark-bg: #0a0e27;
+            --card-bg: #1a1f3a;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, rgba(0, 26, 77, 0.7), rgba(10, 14, 39, 0.7)), 
+                        url('BL 2.jpg') center/cover fixed no-repeat;
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(0, 26, 77, 0.95);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--light-blue);
+        }
+
+        nav .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, var(--light-blue), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--light-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(rgba(0, 26, 77, 0.8), rgba(0, 26, 77, 0.8));
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: glow 2s ease-in-out infinite;
+            text-shadow: 0 0 20px var(--light-blue);
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px var(--light-blue); }
+            50% { text-shadow: 0 0 40px var(--gold), 0 0 60px var(--light-blue); }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--light-blue);
+            margin-bottom: 2rem;
+        }
+
+        /* Countdown Timer */
+        .timer-container {
+            background: var(--card-bg);
+            border: 3px solid var(--light-blue);
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            box-shadow: 0 0 30px rgba(0, 204, 255, 0.3);
+            animation: pulse-border 2s infinite;
+        }
+
+        @keyframes pulse-border {
+            0%, 100% { box-shadow: 0 0 30px rgba(0, 204, 255, 0.3); }
+            50% { box-shadow: 0 0 50px rgba(255, 215, 0, 0.5); }
+        }
+
+        .timer {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .time-unit {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.3), rgba(0, 204, 255, 0.2));
+            padding: 2rem 1rem;
+            border-radius: 10px;
+            border: 2px solid var(--light-blue);
+            text-align: center;
+        }
+
+        .time-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--gold);
+            text-shadow: 0 0 10px var(--light-blue);
+        }
+
+        .time-label {
+            font-size: 0.9rem;
+            color: var(--light-blue);
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Content Sections */
+        .section {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(10, 14, 39, 0.85);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--light-blue);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--light-blue), var(--gold));
+        }
+
+        /* Synopsis */
+        .synopsis {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-left: 5px solid var(--primary-blue);
+            border-radius: 10px;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        /* Characters Section */
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .character-card {
+            background: var(--card-bg);
+            border: 2px solid var(--primary-blue);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .character-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 204, 255, 0.4);
+        }
+
+        .character-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .character-info {
+            padding: 1.5rem;
+        }
+
+        .character-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .character-role {
+            color: var(--light-blue);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .character-desc {
+            font-size: 0.85rem;
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        /* News Section */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .news-item {
+            background: var(--card-bg);
+            border: 2px solid var(--light-blue);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .news-item:hover {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.2), rgba(0, 204, 255, 0.1));
+            border-color: var(--gold);
+        }
+
+        .news-date {
+            color: var(--gold);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .news-title {
+            color: var(--light-blue);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .news-content {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-blue);
+            text-align: center;
+            padding: 2rem;
+            border-top: 3px solid var(--light-blue);
+            margin-top: 3rem;
+        }
+
+        footer p {
+            color: #aaa;
+            margin: 0.5rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .timer {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .time-value {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">BLUE LOCK</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#timer">Countdown</a></li>
+            <li><a href="#synopsis">Synopsis</a></li>
+            <li><a href="#characters">Characters</a></li>
+            <li><a href="#news">News</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>⚽ BLUE LOCK ⚽</h1>
+        <p>The Ultimate Anime Release Event</p>
+        <p style="color: var(--gold); font-size: 1.1rem;">New Season Coming October 9, 2026</p>
+    </section>
+
+    <!-- Countdown Timer -->
+    <div class="timer-container" id="timer">
+        <h2 style="text-align: center; color: var(--light-blue); margin-bottom: 1rem;">TIME UNTIL RELEASE</h2>
+        <div class="timer">
+            <div class="time-unit">
+                <div class="time-value" id="days">0</div>
+                <div class="time-label">Days</div>
+            </div>
+            <div class="time-unit">
+                <div class="time-value" id="hours">0</div>
+                <div class="time-label">Hours</div>
+            </div>
+            <div class="time-unit">
+                <div class="time-value" id="minutes">0</div>
+                <div class="time-label">Minutes</div>
+            </div>
+            <div class="time-unit">
+                <div class="time-value" id="seconds">0</div>
+                <div class="time-label">Seconds</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Synopsis Section -->
+    <section class="section" id="synopsis">
+        <h2 class="section-title">📖 Synopsis</h2>
+        <div class="synopsis">
+            <p>
+                Blue Lock is an intense sports anime following Isagi Yoichi, a promising young soccer player with an unconventional vision for the game. 
+                Recruited into the secretive Blue Lock facility, a specialized training program designed to develop the world's most powerful striker, 
+                Isagi competes against Japan's top young talents in a high-stakes tournament.
+            </p>
+            <br>
+            <p>
+                With unique abilities, strategic gameplay, and thrilling matches, Blue Lock explores themes of ambition, rivalry, and the pursuit of excellence. 
+                Each character brings their own weapons and strategies to the field, creating unforgettable soccer showdowns that redefine the sport itself.
+            </p>
+        </div>
+    </section>
+
+    <!-- Characters Section -->
+    <section class="section" id="characters">
+        <h2 class="section-title">👥 Main Characters</h2>
+        <div class="characters-grid">
+            <div class="character-card">
+                <div class="character-image"><img src="./images/iii.jpeg" alt="Isagi Yoichi"></div>
+                <div class="character-info">
+                    <div class="character-name">Isagi Yoichi</div>
+                    <div class="character-role">Protagonist / Forward</div>
+                    <div class="character-desc">A soccer prodigy with exceptional spatial awareness and adaptability. Known for his unique "weapon" and unstoppable potential.</div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-image"><img src="./images/rin 11.jpeg" alt="Rin Itoshi"></div>
+                <div class="character-info">
+                    <div class="character-name">Rin Itoshi</div>
+                    <div class="character-role">Rival / Forward</div>
+                    <div class="character-desc">A talented striker seeking to defeat Isagi. His perfected techniques and cold demeanor make him a formidable opponent.</div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-image"><img src="./images/kkkk.jpeg" alt="Rensuke Kunigami"></div>
+                <div class="character-info">
+                    <div class="character-name">Rensuke Kunigami</div>
+                    <div class="character-role">Forward</div>
+                    <div class="character-desc">A passionate player with explosive power. His determination and physical prowess make him an essential team player.</div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-image"><img src="./images/bachira 2.png" alt="Meguru Bachira"></div>
+                <div class="character-info">
+                    <div class="character-name">Meguru Bachira</div>
+                    <div class="character-role">Midfielder / Forward</div>
+                    <div class="character-desc">A joyful and talented player with exceptional dribbling skills and unpredictable movements that confuse opponents.</div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-image"><img src="./images/chi chi.jpeg" alt="Hyoma Chigiri"></div>
+                <div class="character-info">
+                    <div class="character-name">Hyoma Chigiri</div>
+                    <div class="character-role">Forward / Speed Expert</div>
+                    <div class="character-desc">A speed-focused player with lightning-fast reflexes. His weapon is his unmatched acceleration on the field.</div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-image"><img src="./images/ego o.jpeg" alt="Ego Jinpachi"></div>
+                <div class="character-info">
+                    <div class="character-name">Ego Jinpachi</div>
+                    <div class="character-role">Blue Lock Director</div>
+                    <div class="character-desc">The enigmatic creator of Blue Lock. His unconventional training methods push players to their absolute limits.</div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-image"><img src="./images/nagi 2.jpeg" alt="Seishiro Nagi"></div>
+                <div class="character-info">
+                    <div class="character-name">Seishiro Nagi</div>
+                    <div class="character-role">Forward / Genius Striker</div>
+                    <div class="character-desc">A lazy but incredibly talented striker with genius-level soccer intelligence. His ability to see the entire field and make perfect plays makes him a formidable force.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="section" id="news">
+        <h2 class="section-title">📰 Latest News & Updates</h2>
+        <div class="news-grid">
+            <div class="news-item">
+                <div class="news-date">April 15, 2026</div>
+                <div class="news-title">Official Release Confirmed</div>
+                <div class="news-content">
+                    The new season of Blue Lock has been officially confirmed for October 9, 2026! Production is in full swing with the creative team delivering stunning animation quality.
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-date">April 10, 2026</div>
+                <div class="news-title">New Characters Announced</div>
+                <div class="news-content">
+                    Exciting new character additions have been revealed! The upcoming season will introduce powerful new competitors and unexpected allies to the Blue Lock universe.
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-date">March 28, 2026</div>
+                <div class="news-title">Soundtrack Preview Released</div>
+                <div class="news-content">
+                    The phenomenal new soundtrack has been previewed online! Fans are loving the high-energy opening and emotional ending themes that capture the spirit of the season.
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-date">March 15, 2026</div>
+                <div class="news-title">Extended Trailer Available</div>
+                <div class="news-content">
+                    A jaw-dropping extended trailer showcasing intense match sequences and dramatic character moments is now available. Over 5 million views already!
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-date">February 28, 2026</div>
+                <div class="news-title">Behind-the-Scenes Special</div>
+                <div class="news-content">
+                    Watch exclusive behind-the-scenes footage revealing how the animation team brings the intense soccer action to life with cutting-edge techniques.
+                </div>
+            </div>
+
+            <div class="news-item">
+                <div class="news-date">February 10, 2026</div>
+                <div class="news-title">Fan Engagement Campaign Begins</div>
+                <div class="news-content">
+                    Join the global Blue Lock community! Participate in online contests, fan art challenges, and exclusive Q&A sessions with the production team.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Blue Lock Anime - Official Release Website</p>
+        <p>New Season Coming October 9, 2026 ⚽</p>
+        <p>Get ready for the ultimate soccer experience!</p>
+    </footer>
+
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date('October 9, 2026 00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+            if (distance < 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                document.querySelector('.timer-container h2').textContent = '🎉 BLUE LOCK IS HERE! 🎉';
+            }
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
